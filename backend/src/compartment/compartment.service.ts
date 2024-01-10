@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCompartmentDto } from './dto/create-compartment.dto';
 import { UpdateCompartmentDto } from './dto/update-compartment.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Compartment } from './entities/compartment.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CompartmentService {
-  create(createCompartmentDto: CreateCompartmentDto) {
-    return 'This action adds a new compartment';
+  constructor(
+    @InjectRepository(Compartment)
+    private compartmentRepo: Repository<Compartment>,
+  ) {}
+
+  async create(createCompartmentDto: CreateCompartmentDto) {
+    try {
+      const result = this.compartmentRepo.create(createCompartmentDto);
+      return await this.compartmentRepo.save(result);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  findAll() {
-    return `This action returns all compartment`;
+  async findAll() {
+    return this.compartmentRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} compartment`;
+  async findOne(id: number) {
+    const compartment = await this.compartmentRepo.findOne({ where: { id } });
+    if (!compartment) {
+      throw new NotFoundException(`Product #${id} not found`);
+    }
+    return compartment;
   }
 
-  update(id: number, updateCompartmentDto: UpdateCompartmentDto) {
-    return `This action updates a #${id} compartment`;
+  async update(id: number, updateCompartmentDto: UpdateCompartmentDto) {
+    const compartment = await this.compartmentRepo.preload({
+      id,
+      ...updateCompartmentDto,
+    });
+    if (!compartment) {
+      throw new NotFoundException(`Product #${id} not found`);
+    }
+    return await this.compartmentRepo.save(compartment);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} compartment`;
+  async remove(id: number) {
+    const compartment = await this.compartmentRepo.findOne({ where: { id } });
+    return this.compartmentRepo.remove(compartment);
   }
 }
