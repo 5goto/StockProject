@@ -1,6 +1,6 @@
 .hint {
   flex: 1 1 80%;
-  background-color: #ffe4c4;
+  background-color: #fff0df;
 
   display: flex;
   align-items: center;
@@ -8,5 +8,5 @@
 }
 
 .hintImg {
-  width: 100px;
+  pointer-events: none;
 }

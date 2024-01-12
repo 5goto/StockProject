@@ -1,0 +1,25 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* по умолчанию 2 колонки */
+  grid-template-rows: repeat(2, 1fr); /* по умолчанию 2 строки */
+  gap: 10px; /* промежуток между элементами */
+  flex: 1 0 80%;
+}
+
+.containerWithOnlyOneItem {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* по умолчанию 2 колонки */
+  grid-template-rows: repeat(1, 1fr); /* по умолчанию 2 строки */
+  gap: 10px; /* промежуток между элементами */
+  flex: 1 0 80%;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+  text-align: center;
+  background-color: #fff0df;
+}

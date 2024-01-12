@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styles from './SplashScreen.module.css';
 import React from 'react';
 
-interface SplashProps {
+export interface SplashProps {
   children: ReactNode;
 }
 

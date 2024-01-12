@@ -1,0 +1,13 @@
+.placement {
+  cursor: pointer;
+
+  color: #212121;
+  text-align: center;
+
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.placement:hover {
+  background-color: #ffe4c4;
+}
