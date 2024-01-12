@@ -1,0 +1,8 @@
+.stock {
+  margin: 0;
+  display: flex;
+  /* place-items: center; */
+  min-width: 100%;
+  min-height: 100vh;
+  background-color: bisque;
+}
