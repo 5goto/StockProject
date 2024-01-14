@@ -1,7 +1,7 @@
 import styles from './Placement.module.css';
 
 export interface PlacementsData {
-  id?: string;
+  id?: number;
   name: string;
   floor: number;
 }
@@ -9,6 +9,7 @@ export interface PlacementsData {
 export const Placement: React.FC<PlacementsData> = ({ id, name, floor }) => {
   return (
     <div className={styles.placement}>
+      <span>{id}</span>
       <span>{name}</span>
       <span>{floor}</span>
     </div>

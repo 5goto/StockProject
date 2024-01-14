@@ -1,0 +1,64 @@
+.main {
+  margin: 0;
+  display: flex;
+  min-width: 100%;
+  min-height: 100vh;
+  background-color: coral;
+}
+
+.left,
+.right {
+  flex: 0 0 50%;
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s, filter 0.3s;
+  filter: brightness(30%);
+}
+
+.left:hover .image,
+.right:hover .image {
+  transform: scale(1.25);
+  filter: brightness(100%);
+}
+
+.overlayContent {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.additionalContent {
+  opacity: 0;
+  transition: opacity 1s;
+  display: none;
+}
+
+.imageContainer:hover .overlayContent {
+  opacity: 1;
+}
+
+.overlayContent:hover .additionalContent {
+  display: block;
+  opacity: 1;
+}

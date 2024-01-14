@@ -3,7 +3,8 @@
   grid-template-columns: repeat(2, 1fr); /* по умолчанию 2 колонки */
   grid-template-rows: repeat(2, 1fr); /* по умолчанию 2 строки */
   gap: 10px; /* промежуток между элементами */
-  flex: 1 0 80%;
+  flex: 0 0 60%;
+  border-radius: 10px;
 }
 
 .containerWithOnlyOneItem {
@@ -11,7 +12,8 @@
   grid-template-columns: repeat(2, 1fr); /* по умолчанию 2 колонки */
   grid-template-rows: repeat(1, 1fr); /* по умолчанию 2 строки */
   gap: 10px; /* промежуток между элементами */
-  flex: 1 0 80%;
+  flex: 0 0 60%;
+  border-radius: 10px;
 }
 
 .item {
