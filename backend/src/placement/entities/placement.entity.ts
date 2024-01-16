@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Compartment } from 'src/compartment/entities/compartment.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Placement {
@@ -8,6 +9,9 @@ export class Placement {
   @Column()
   placement_floor: number;
 
-  @Column()
+  @Column({ length: 255 })
   placement_name: string;
+
+  @OneToMany(() => Compartment, (compartment) => compartment.placement)
+  compartments: Compartment[];
 }

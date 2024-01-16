@@ -25,10 +25,12 @@ export class ConditionsService {
     return this.conditionRepo.find();
   }
 
-  async findOne(id: number) {
-    const condition = await this.conditionRepo.findOne({ where: { id } });
+  async findOne(conditions_id: number) {
+    const condition = await this.conditionRepo.findOne({
+      where: { conditions_id },
+    });
     if (!condition) {
-      throw new NotFoundException(`Product #${id} not found`);
+      throw new NotFoundException(`Product #${conditions_id} not found`);
     }
     return condition;
   }
@@ -44,8 +46,10 @@ export class ConditionsService {
     return await this.conditionRepo.save(condition);
   }
 
-  async remove(id: number) {
-    const condition = await this.conditionRepo.findOne({ where: { id } });
+  async remove(conditions_id: number) {
+    const condition = await this.conditionRepo.findOne({
+      where: { conditions_id },
+    });
     return this.conditionRepo.remove(condition);
   }
 }

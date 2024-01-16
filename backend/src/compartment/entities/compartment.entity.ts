@@ -4,9 +4,11 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Placement } from 'src/placement/entities/placement.entity';
 import { Condition } from 'src/conditions/entities/condition.entity';
+import { Product } from 'src/product/entities/product.entity';
 
 @Entity()
 export class Compartment {
@@ -29,4 +31,7 @@ export class Compartment {
   @ManyToOne(() => Placement, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'placement_id' })
   placement: Placement;
+
+  @OneToMany(() => Product, (product) => product.compartment)
+  products: Product[];
 }

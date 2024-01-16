@@ -5,31 +5,24 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Compartment } from 'src/compartment/entities/compartment.entity';
 import { Condition } from 'src/conditions/entities/condition.entity';
+import { Compartment } from 'src/compartment/entities/compartment.entity';
 
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
-  id: number;
+  product_id: number;
 
-  @Column()
-  name: string;
+  @Column({ length: 255 })
+  product_name: string;
 
-  @Column()
-  capacity: number;
-
-  @Column({ type: 'date' })
-  receiptDate: Date;
-
-  @Column()
-  shelfLifeDays: number;
+  // @Column()
+  // conditions_id: number;
 
   @ManyToOne(() => Condition, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'conditions_id' })
   conditions: Condition;
 
-  @ManyToOne(() => Compartment, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'compartment_id' })
+  @ManyToOne(() => Compartment, (compartment) => compartment.products)
   compartment: Compartment;
 }

@@ -9,8 +9,11 @@ export enum ConditionsType {
 @Entity()
 export class Condition {
   @PrimaryGeneratedColumn()
-  id: number;
+  conditions_id: number;
 
-  @Column()
+  @Column({
+    type: 'enum',
+    enum: ConditionsType,
+  })
   conditions_type: ConditionsType;
 }

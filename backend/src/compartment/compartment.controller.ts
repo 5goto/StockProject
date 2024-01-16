@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { CompartmentService } from './compartment.service';
 import { CreateCompartmentDto } from './dto/create-compartment.dto';
 import { UpdateCompartmentDto } from './dto/update-compartment.dto';
@@ -13,8 +22,12 @@ export class CompartmentController {
   }
 
   @Get()
-  findAll() {
-    return this.compartmentService.findAll();
+  findAll(@Query('placement_id') placement_id?: number) {
+    if (placement_id) {
+      return this.compartmentService.findAllByPlacement(+placement_id);
+    } else {
+      return this.compartmentService.findAll();
+    }
   }
 
   @Get(':id')
@@ -23,7 +36,10 @@ export class CompartmentController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCompartmentDto: UpdateCompartmentDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCompartmentDto: UpdateCompartmentDto,
+  ) {
     return this.compartmentService.update(+id, updateCompartmentDto);
   }
 

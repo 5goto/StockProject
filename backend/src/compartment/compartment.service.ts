@@ -4,6 +4,7 @@ import { UpdateCompartmentDto } from './dto/update-compartment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Compartment } from './entities/compartment.entity';
 import { Repository } from 'typeorm';
+import { log } from 'console';
 
 @Injectable()
 export class CompartmentService {
@@ -23,6 +24,20 @@ export class CompartmentService {
 
   async findAll() {
     return this.compartmentRepo.find();
+  }
+
+  async findAllByPlacement(placement_id): Promise<Compartment[]> {
+    const result = this.compartmentRepo
+      .createQueryBuilder('compartment')
+      .select([
+        'compartment.id',
+        'compartment.capacity',
+        'condition.conditions_type',
+      ])
+      .leftJoin('compartment.conditions', 'condition')
+      .where(`compartment.placement_id = ${placement_id}`)
+      .getRawMany();
+    return result;
   }
 
   async findOne(id: number) {
