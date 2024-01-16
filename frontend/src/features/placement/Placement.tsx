@@ -1,14 +1,22 @@
+import { useDispatch } from 'react-redux';
+import { addTab } from '../compartment/compartmentSlice';
 import styles from './Placement.module.css';
 
 export interface PlacementsData {
-  id?: number;
+  id: number;
   name: string;
   floor: number;
 }
 
 export const Placement: React.FC<PlacementsData> = ({ id, name, floor }) => {
+  const dispatch = useDispatch();
+
+  const onBlockClickHandler = () => {
+    dispatch(addTab(id));
+  };
+
   return (
-    <div className={styles.placement}>
+    <div className={styles.placement} onClick={onBlockClickHandler}>
       <span>{id}</span>
       <span>{name}</span>
       <span>{floor}</span>

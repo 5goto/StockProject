@@ -1,25 +1,21 @@
 import React from 'react';
+// import { CompartmentType } from '../../api/compartment';
+import { ConditionsType } from './CompartmentList';
 
-export enum ConditionsType {
-  Flammable = 'flammable',
-  Frozen = 'frozen',
-  Fragile = 'fragile',
-}
-
-export interface CompartmentProps {
-  id?: string;
+interface CompartmentProps {
+  id: number;
   capacity: number;
-  condition: ConditionsType;
+  conditions_type: ConditionsType;
 }
 
 export const Compartment: React.FC<CompartmentProps> = ({
+  id,
   capacity,
-  condition,
+  conditions_type,
 }) => {
   return (
     <div>
-      <span>{capacity}</span>
-      <span>{condition}</span>
+      {id} {capacity} {conditions_type}
     </div>
   );
 };

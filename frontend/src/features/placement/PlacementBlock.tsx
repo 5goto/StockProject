@@ -21,8 +21,6 @@ export default function PlacementBlock() {
     return <div>Error fetching data</div>;
   }
 
-  console.log(data);
-
   return (
     <div className={styles.placementBlock}>
       <h2>List of your placements</h2>
