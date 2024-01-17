@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { UnitService } from './unit.service';
 import { CreateUnitDto } from './dto/create-unit.dto';
 import { UpdateUnitDto } from './dto/update-unit.dto';
@@ -13,8 +22,12 @@ export class UnitController {
   }
 
   @Get()
-  findAll() {
-    return this.unitService.findAll();
+  findAll(@Query('compartment_id') compartment_id?: number) {
+    if (compartment_id) {
+      return this.unitService.findAllProductInfoByCompartmentId(compartment_id);
+    } else {
+      return this.unitService.findAll();
+    }
   }
 
   @Get(':id')

@@ -31,8 +31,8 @@ export class Unit {
   @Column({ type: 'enum', enum: StatusType, default: StatusType.NotPlaced })
   status: StatusType;
 
-  @Column()
-  compartment_id: number;
+  @Column({ nullable: true })
+  compartment_id: number | null;
 
   @Column()
   product_id: number;

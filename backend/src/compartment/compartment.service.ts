@@ -4,7 +4,6 @@ import { UpdateCompartmentDto } from './dto/update-compartment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Compartment } from './entities/compartment.entity';
 import { Repository } from 'typeorm';
-import { log } from 'console';
 
 @Injectable()
 export class CompartmentService {

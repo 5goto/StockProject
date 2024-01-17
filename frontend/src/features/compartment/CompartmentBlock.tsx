@@ -12,6 +12,10 @@ export const CompartmentBlock: React.FC<Props> = ({
 }) => {
   const childCount = React.Children.count(children);
 
+  if (childCount === 0) {
+    return <h1>&larr; Select one of the placement</h1>;
+  }
+
   if (childCount === 1) {
     return (
       <div className={styles.containerWithOnlyOneItem}>

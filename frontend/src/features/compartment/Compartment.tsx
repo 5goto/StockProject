@@ -1,6 +1,9 @@
 import React from 'react';
-// import { CompartmentType } from '../../api/compartment';
 import { ConditionsType } from './CompartmentList';
+import styles from './Compartment.module.css';
+import { useDispatch } from 'react-redux';
+import { setCompartment } from './compartmentSlice';
+import { RequestType, setRequestType } from '../product/productSlice';
 
 interface CompartmentProps {
   id: number;
@@ -13,8 +16,14 @@ export const Compartment: React.FC<CompartmentProps> = ({
   capacity,
   conditions_type,
 }) => {
+  const dispatch = useDispatch();
+  const onClickHandler = () => {
+    dispatch(setCompartment(id));
+    dispatch(setRequestType(RequestType.COMPARTMENT));
+  };
+
   return (
-    <div>
+    <div className={styles.compartment} onClick={onClickHandler}>
       {id} {capacity} {conditions_type}
     </div>
   );

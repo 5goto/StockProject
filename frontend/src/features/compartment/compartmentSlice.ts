@@ -2,10 +2,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface CompartmentState {
   compartmentTabs: number[];
+  currentCompartment: number | null;
 }
 
 const initialState: CompartmentState = {
   compartmentTabs: [],
+  currentCompartment: null,
 };
 
 const compartmentSlice = createSlice({
@@ -22,8 +24,11 @@ const compartmentSlice = createSlice({
       }
     },
     // closeTab(state, action) {},
+    setCompartment(state, action: PayloadAction<number>) {
+      state.currentCompartment = action.payload;
+    },
   },
 });
 
-export const { addTab } = compartmentSlice.actions;
+export const { addTab, setCompartment } = compartmentSlice.actions;
 export default compartmentSlice.reducer;

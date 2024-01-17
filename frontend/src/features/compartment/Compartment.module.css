@@ -1,0 +1,8 @@
+.compartment {
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.compartment:hover {
+  background-color: #ffe4c4;
+}

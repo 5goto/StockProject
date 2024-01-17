@@ -21,8 +21,41 @@ export class UnitService {
     }
   }
 
+  async findAllProductInfoByCompartmentId(compartment_id: number) {
+    return this.unitRepo
+      .createQueryBuilder('unit')
+      .select([
+        'unit.unit_id',
+        'unit.init_capacity',
+        'unit.receipt_date',
+        'unit.date_of_write_off',
+        'unit.status',
+        'unit.compartment_id',
+        'product.product_name',
+        'condition.conditions_type',
+      ])
+      .leftJoin('unit.product', 'product')
+      .leftJoin('product.conditions', 'condition')
+      .where(`unit.compartment_id = ${compartment_id}`)
+      .getRawMany();
+  }
+
   async findAll() {
-    return this.unitRepo.find();
+    return this.unitRepo
+      .createQueryBuilder('unit')
+      .select([
+        'unit.unit_id',
+        'unit.init_capacity',
+        'unit.receipt_date',
+        'unit.date_of_write_off',
+        'unit.status',
+        'unit.compartment_id',
+        'product.product_name',
+        'condition.conditions_type',
+      ])
+      .leftJoin('unit.product', 'product')
+      .leftJoin('product.conditions', 'condition')
+      .getRawMany();
   }
 
   async findOne(unit_id: number) {
