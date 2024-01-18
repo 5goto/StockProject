@@ -1,8 +1,23 @@
 .productBlock {
   flex: 0 0 20%;
-  background-color: #fff0df;
+  background-color: #ffff;
+  border-left: 3px solid #212121;
 }
 
 .filter {
   text-align: center;
+}
+
+.productBlock > h2 {
+  text-align: center;
+  color: #ffff;
+  background-color: #212121;
+  margin: 0;
+  padding: 1em;
+}
+
+.hint {
+  text-align: center;
+  margin: 0;
+  padding: 1em;
 }

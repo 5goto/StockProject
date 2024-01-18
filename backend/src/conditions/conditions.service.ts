@@ -30,7 +30,7 @@ export class ConditionsService {
       where: { conditions_id },
     });
     if (!condition) {
-      throw new NotFoundException(`Product #${conditions_id} not found`);
+      throw new NotFoundException(`Condition #${conditions_id} not found`);
     }
     return condition;
   }
@@ -41,7 +41,7 @@ export class ConditionsService {
       ...updateConditionDto,
     });
     if (!condition) {
-      throw new NotFoundException(`Product #${id} not found`);
+      throw new NotFoundException(`Condition #${id} not found`);
     }
     return await this.conditionRepo.save(condition);
   }

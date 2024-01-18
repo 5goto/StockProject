@@ -3,7 +3,7 @@
   grid-template-columns: repeat(2, 1fr); /* по умолчанию 2 колонки */
   grid-template-rows: repeat(2, 1fr); /* по умолчанию 2 строки */
   gap: 10px; /* промежуток между элементами */
-  flex: 0 0 60%;
+  flex: 0 0 64%;
   border-radius: 10px;
 }
 
@@ -12,7 +12,7 @@
   grid-template-columns: repeat(2, 1fr); /* по умолчанию 2 колонки */
   grid-template-rows: repeat(1, 1fr); /* по умолчанию 2 строки */
   gap: 10px; /* промежуток между элементами */
-  flex: 0 0 60%;
+  flex: 0 0 64%;
   border-radius: 10px;
 }
 
@@ -20,8 +20,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  padding: 10px;
+  background-color: #ffff;
+  /* padding: 10px; */
   text-align: center;
-  background-color: #fff0df;
+  border: 3px solid #212121;
+  /* box-shadow: 3px 3px 5px 0px #212121; */
+}
+
+.screen {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.screen h1 {
+  color: #212121;
 }

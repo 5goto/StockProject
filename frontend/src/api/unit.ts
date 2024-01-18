@@ -63,3 +63,36 @@ export async function getAllProducts() {
     }
   }
 }
+
+export interface updateProductProps {
+  productId: string;
+  compartmentId: string;
+}
+
+export async function updateProductCompartment(props: updateProductProps) {
+  try {
+    console.log(props.productId, '&&');
+    console.log(props.compartmentId, '&&');
+    const responce = await axios.patch(
+      `http://localhost:3000/unit/${props.productId}`,
+      {
+        compartment_id: props.compartmentId,
+      },
+      {
+        headers: {
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    return responce;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log('error message: ', error.message);
+      throw error;
+    } else {
+      console.log('unexpected error: ', error);
+      throw error;
+    }
+  }
+}

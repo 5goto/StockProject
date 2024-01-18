@@ -6,6 +6,7 @@ import { Hint } from '../UI/hint/Hint';
 import { CompartmentList } from '../features/compartment/CompartmentList.js';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store.js';
+import { Header } from '../UI/header/Header.js';
 
 export const Stock = () => {
   const productTabsIndexes = useSelector(
@@ -16,13 +17,19 @@ export const Stock = () => {
 
   return (
     <div className={styles.stock}>
-      <PlacementBlock></PlacementBlock>
-      <CompartmentBlock defaultComponent={<Hint></Hint>}>
-        {productTabsIndexes.map((item: number, index: number) => (
-          <CompartmentList key={index} placementId={item}></CompartmentList>
-        ))}
-      </CompartmentBlock>
-      <ProductBlock></ProductBlock>
+      <Header />
+      <div className={styles.main}>
+        <PlacementBlock></PlacementBlock>
+        <CompartmentBlock defaultComponent={<Hint></Hint>}>
+          {productTabsIndexes.map((item: number, index: number) => (
+            <CompartmentList
+              key={index}
+              index={index}
+              placementId={item}></CompartmentList>
+          ))}
+        </CompartmentBlock>
+        <ProductBlock />
+      </div>
     </div>
   );
 };

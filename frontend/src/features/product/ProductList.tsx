@@ -25,10 +25,15 @@ export const ProductList = () => {
     return <div>Error fetching data</div>;
   }
 
+  if (data?.length === 0) {
+    return <div>Empty</div>;
+  }
+
   return (
     <div>
       {data?.map((item: ProductUnitType) => (
         <Product
+          key={item.unit_unit_id}
           id={item.unit_unit_id}
           capacity={item.unit_init_capacity}
           receipt_date={item.unit_receipt_date}

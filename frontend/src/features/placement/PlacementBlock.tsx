@@ -13,6 +13,7 @@ export default function PlacementBlock() {
     queryFn: getPlacement,
   });
 
+  console.log(data);
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -21,9 +22,13 @@ export default function PlacementBlock() {
     return <div>Error fetching data</div>;
   }
 
+  if (data?.length === 0) {
+    return <div>Данные о помещениях отсутствуют</div>;
+  }
+
   return (
     <div className={styles.placementBlock}>
-      <h2>List of your placements</h2>
+      <h2>Помещения</h2>
       {data?.map((item: PlacementType) => (
         <Placement
           key={item.id}

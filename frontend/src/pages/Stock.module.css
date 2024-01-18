@@ -1,9 +1,20 @@
 .stock {
   margin: 0;
-  display: flex;
+  /* display: flex; */
   /* place-items: center; */
   min-width: 100%;
   min-height: 100vh;
-  background-color: bisque;
+  background-color: #ffff;
+  /* flex-direction: column;
+  justify-content: space-between; */
+}
+
+.main {
+  flex: 1 1 90%;
+  margin: 0;
+  display: flex;
   justify-content: space-between;
+  min-width: 100%;
+  min-height: 90vh;
+  /* background-image: url('../assets/left.jpg'); */
 }

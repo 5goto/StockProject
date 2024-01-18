@@ -3,7 +3,7 @@
   display: flex;
   min-width: 100%;
   min-height: 100vh;
-  background-color: coral;
+  background-color: rgb(255, 255, 255);
 }
 
 .left,
@@ -13,6 +13,39 @@
   overflow: hidden;
   align-items: center;
   justify-content: center;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #212121;
+  align-self: center;
+  margin-top: auto;
+}
+
+.content h1 {
+  font-size: 64px;
+  margin: 10px;
+}
+
+.content h3 {
+  font-size: 32px;
+  margin: 10;
+}
+
+.foot {
+  text-transform: uppercase;
+  margin-top: auto;
+  margin-bottom: 10px;
 }
 
 .imageContainer {
@@ -28,37 +61,51 @@
   width: 100%;
   height: 100%;
   transition: transform 0.5s, filter 0.3s;
-  filter: brightness(30%);
+  z-index: 1;
+  pointer-events: none;
 }
 
-.left:hover .image,
-.right:hover .image {
-  transform: scale(1.25);
-  filter: brightness(100%);
-}
-
-.overlayContent {
+.startImg {
+  width: 400px;
   position: absolute;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  z-index: 2;
+  top: 50%; /* помещаем изображение на центральную линию */
+  left: -30px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
-.additionalContent {
-  opacity: 0;
-  transition: opacity 1s;
-  display: none;
+.right:hover .image {
+  filter: brightness(20%);
 }
 
-.imageContainer:hover .overlayContent {
-  opacity: 1;
+.right:hover {
+  cursor: pointer;
 }
 
-.overlayContent:hover .additionalContent {
-  display: block;
-  opacity: 1;
+.topImg {
+  position: absolute;
+  z-index: 2;
+  top: 100px;
+  right: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.bottomImg {
+  position: absolute;
+  z-index: 2;
+  bottom: -150px;
+  right: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.imgText {
+  font-size: 24px;
+  position: absolute;
+  z-index: 2;
+  left: 120px;
+  top: 44%; /* помещаем изображение на центральную линию */
+  color: #ffff;
 }

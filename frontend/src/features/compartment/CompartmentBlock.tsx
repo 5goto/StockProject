@@ -1,5 +1,6 @@
 import styles from './CompartmentBlock.module.css';
 import React, { ReactNode } from 'react';
+import placementImg from '../../assets/placementImg.png';
 
 type Props = {
   children: ReactNode | ReactNode[];
@@ -13,7 +14,12 @@ export const CompartmentBlock: React.FC<Props> = ({
   const childCount = React.Children.count(children);
 
   if (childCount === 0) {
-    return <h1>&larr; Select one of the placement</h1>;
+    return (
+      <div className={styles.screen}>
+        <h1>&larr; Выберете одно из помещений</h1>
+        <img src={placementImg} alt="placement" />
+      </div>
+    );
   }
 
   if (childCount === 1) {

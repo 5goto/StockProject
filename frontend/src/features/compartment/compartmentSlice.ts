@@ -23,12 +23,16 @@ const compartmentSlice = createSlice({
         state.compartmentTabs[3] = action.payload;
       }
     },
-    // closeTab(state, action) {},
+    closeTab(state, action) {
+      state.compartmentTabs = state.compartmentTabs.filter(
+        (_, index) => index !== action.payload
+      );
+    },
     setCompartment(state, action: PayloadAction<number>) {
       state.currentCompartment = action.payload;
     },
   },
 });
 
-export const { addTab, setCompartment } = compartmentSlice.actions;
+export const { addTab, setCompartment, closeTab } = compartmentSlice.actions;
 export default compartmentSlice.reducer;

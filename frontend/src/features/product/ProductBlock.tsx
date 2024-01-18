@@ -17,7 +17,9 @@ export const ProductBlock = () => {
           <p>Раскрывающийся текст</p>
         </details>
       </div>
-      <div>{compartmentId ? <ProductList /> : <h1>Hint</h1>}</div>
+      <div className={styles.hint}>
+        {compartmentId ? <ProductList /> : <h2>&larr; Выберите отсек</h2>}
+      </div>
     </div>
   );
 };

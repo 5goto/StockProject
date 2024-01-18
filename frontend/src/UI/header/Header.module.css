@@ -1,0 +1,52 @@
+.headerStyle {
+  flex: 1 0 10%;
+  background-color: #ffff;
+  width: 100%;
+  min-height: 10vh;
+
+  display: flex;
+  justify-content: space-between;
+  background-image: url('../../assets/left.jpg');
+  position: relative;
+}
+
+.headerStyle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Черный цвет с непрозрачностью 0.5 */
+  z-index: 1; /* Чтобы слой затемнения был наверху фонового изображения */
+}
+
+.logo h2 {
+  margin: 0;
+  font-size: 32px;
+  color: #ffff;
+}
+
+.logo {
+  z-index: 3;
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.navigation {
+  z-index: 3;
+  padding-right: 10%;
+  display: flex;
+  align-items: center;
+  color: #212121;
+  border-radius: 5px;
+}
+
+.navigation a {
+  z-index: 3;
+  color: #212121;
+  background-color: white;
+  padding: 0.5em 1em;
+  border-radius: 25px;
+}

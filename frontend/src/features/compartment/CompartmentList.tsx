@@ -5,6 +5,9 @@ import {
   getCompartmentsByPlacement,
 } from '../../api/compartment';
 import { Compartment } from './Compartment';
+import { useDispatch } from 'react-redux';
+import { closeTab } from './compartmentSlice';
+import styles from './CompartmentList.module.css';
 
 export enum ConditionsType {
   Flammable = 'flammable',
@@ -14,10 +17,12 @@ export enum ConditionsType {
 
 export interface CompartmentProps {
   placementId: number;
+  index: number;
 }
 
 export const CompartmentList: React.FC<CompartmentProps> = ({
   placementId,
+  index,
 }) => {
   const {
     data,
@@ -28,21 +33,53 @@ export const CompartmentList: React.FC<CompartmentProps> = ({
     queryFn: () => getCompartmentsByPlacement(placementId),
   });
 
+  const dispatch = useDispatch();
+
+  const onCloseClickHandler = () => {
+    dispatch(closeTab(index));
+  };
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <h2 onClick={onCloseClickHandler} style={{ cursor: 'pointer' }}>
+          X
+        </h2>
+        <h3>Loading...</h3>;
+      </div>
+    );
   }
 
   if (isError) {
-    return <div>Error fetching data</div>;
+    return (
+      <div>
+        <h2 onClick={onCloseClickHandler} style={{ cursor: 'pointer' }}>
+          X
+        </h2>
+        <h3> Error fetching data</h3>
+      </div>
+    );
   }
 
   if (data?.length === 0) {
-    return <h2>Empty placement...</h2>;
+    return (
+      <div>
+        <h2 onClick={onCloseClickHandler} style={{ cursor: 'pointer' }}>
+          X
+        </h2>
+        <h2>Empty placement...</h2>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h2>Compartments:</h2>
+    <div className={styles.placementView}>
+      <div className={styles.placementViewTop}>
+        <h2>Список помещений</h2>
+        <h2 onClick={onCloseClickHandler} style={{ cursor: 'pointer' }}>
+          X
+        </h2>
+      </div>
       {data?.map((item: CompartmentType) => (
         <Compartment
           key={item.compartment_id}

@@ -42,7 +42,7 @@ export class CompartmentService {
   async findOne(id: number) {
     const compartment = await this.compartmentRepo.findOne({ where: { id } });
     if (!compartment) {
-      throw new NotFoundException(`Product #${id} not found`);
+      throw new NotFoundException(`Compartment #${id} not found`);
     }
     return compartment;
   }
@@ -53,7 +53,7 @@ export class CompartmentService {
       ...updateCompartmentDto,
     });
     if (!compartment) {
-      throw new NotFoundException(`Product #${id} not found`);
+      throw new NotFoundException(`Compartment #${id} not found`);
     }
     return await this.compartmentRepo.save(compartment);
   }

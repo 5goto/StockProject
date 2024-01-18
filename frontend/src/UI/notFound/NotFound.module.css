@@ -1,5 +1,6 @@
 .notFound {
-  background-color: #ffe4c4;
+  background-color: #ffff;
+  color: #212121;
 
   display: flex;
   justify-content: center;

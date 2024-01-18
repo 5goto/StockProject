@@ -1,4 +1,13 @@
 .placementBlock {
   flex: 0 0 15%;
-  background-color: #a67740;
+  background-color: #ffff;
+  border-right: 3px solid #212121;
+}
+
+.placementBlock h2 {
+  text-align: center;
+  color: #ffff;
+  background-color: #212121;
+  margin: 0;
+  padding: 1em;
 }

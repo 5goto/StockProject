@@ -17,9 +17,8 @@ export const Placement: React.FC<PlacementsData> = ({ id, name, floor }) => {
 
   return (
     <div className={styles.placement} onClick={onBlockClickHandler}>
-      <span>{id}</span>
-      <span>{name}</span>
-      <span>{floor}</span>
+      <span className={styles.floor}>Этаж: {floor}</span>
+      <span className={styles.name}>{name}</span>
     </div>
   );
 };
