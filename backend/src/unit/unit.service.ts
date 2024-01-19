@@ -6,11 +6,7 @@ import { Repository } from 'typeorm';
 import { StatusType, Unit } from './entities/unit.entity';
 import { Product } from 'src/product/entities/product.entity';
 import { Compartment } from 'src/compartment/entities/compartment.entity';
-import {
-  Condition,
-  ConditionsType,
-} from 'src/conditions/entities/condition.entity';
-import { log } from 'console';
+import { Condition } from 'src/conditions/entities/condition.entity';
 
 @Injectable()
 export class UnitService {
@@ -61,6 +57,7 @@ export class UnitService {
       date_of_write_off,
       compartment: existingCompart,
       product: existingProduct,
+      status: existingCompart ? StatusType.Placed : StatusType.NotPlaced,
     });
 
     console.log(unit);
