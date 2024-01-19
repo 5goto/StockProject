@@ -17,7 +17,6 @@ export const CompartmentBlock: React.FC<Props> = ({
     return (
       <div className={styles.screen}>
         <h1>&larr; Выберете одно из помещений</h1>
-        <img src={placementImg} alt="placement" />
       </div>
     );
   }

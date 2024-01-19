@@ -22,21 +22,79 @@ export class CompartmentService {
   }
 
   async findAll() {
-    return this.compartmentRepo.find();
+    const compartmentCapacities = await this.compartmentRepo
+      .createQueryBuilder('compartment')
+      .leftJoin('compartment.unit', 'unit')
+      .addSelect('compartment.id', 'id')
+      .addSelect('compartment.capacity', 'capacity')
+      .addSelect('SUM(unit.init_capacity)', 'totalCapacity')
+      .groupBy('compartment.id')
+      .getRawMany();
+
+    const compartmentConditions = await this.compartmentRepo
+      .createQueryBuilder('compartment')
+      .innerJoin('compartment.conditions', 'conditions')
+      .addSelect('compartment.id', 'id')
+      .addSelect('conditions.conditions_type', 'conditionType')
+      .getRawMany();
+
+    const compartments = compartmentCapacities.map((capacityItem) => {
+      const conditionItem = compartmentConditions.find(
+        (item) => item.id === capacityItem.id,
+      );
+      return {
+        id: capacityItem.id,
+        capacity: capacityItem.capacity,
+        totalCapacity:
+          capacityItem.totalCapacity !== null
+            ? capacityItem.totalCapacity
+            : '0',
+        conditionType: conditionItem ? conditionItem.conditionType : null,
+      };
+    });
+
+    return compartments;
   }
 
-  async findAllByPlacement(placement_id): Promise<Compartment[]> {
-    const result = this.compartmentRepo
+  async findAllByPlacement(placement_id) {
+    const compartmentCapacities = await this.compartmentRepo
       .createQueryBuilder('compartment')
-      .select([
-        'compartment.id',
-        'compartment.capacity',
-        'condition.conditions_type',
-      ])
-      .leftJoin('compartment.conditions', 'condition')
-      .where(`compartment.placement_id = ${placement_id}`)
+      .leftJoin('compartment.unit', 'unit')
+      .addSelect('compartment.id', 'id')
+      .addSelect('compartment.capacity', 'capacity')
+      .addSelect('SUM(unit.init_capacity)', 'totalCapacity')
+      .groupBy('compartment.id')
+      .where('compartment.placement_id = :placementId', {
+        placementId: placement_id,
+      })
       .getRawMany();
-    return result;
+
+    const compartmentConditions = await this.compartmentRepo
+      .createQueryBuilder('compartment')
+      .innerJoin('compartment.conditions', 'conditions')
+      .addSelect('compartment.id', 'id')
+      .addSelect('conditions.conditions_type', 'conditionType')
+      .where('compartment.placement_id = :placementId', {
+        placementId: placement_id,
+      })
+      .getRawMany();
+
+    const compartments = compartmentCapacities.map((capacityItem) => {
+      const conditionItem = compartmentConditions.find(
+        (item) => item.id === capacityItem.id,
+      );
+      return {
+        id: capacityItem.id,
+        capacity: capacityItem.capacity,
+        totalCapacity:
+          capacityItem.totalCapacity !== null
+            ? capacityItem.totalCapacity
+            : '0',
+        conditionType: conditionItem ? conditionItem.conditionType : null,
+      };
+    });
+
+    return compartments;
   }
 
   async findOne(id: number) {

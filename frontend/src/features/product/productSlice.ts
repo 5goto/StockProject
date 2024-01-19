@@ -4,6 +4,7 @@ export enum RequestType {
   NONE,
   COMPARTMENT,
   ALL,
+  NOT_PLACED,
 }
 
 interface ProductState {

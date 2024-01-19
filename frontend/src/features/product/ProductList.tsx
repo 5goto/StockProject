@@ -3,6 +3,7 @@ import { useTypedQuery } from './product.hooks';
 import { RootState } from '../../store';
 import { ProductUnitType } from '../../api/unit';
 import { Product } from './Product';
+import styles from './ProductsList.module.css';
 
 export const ProductList = () => {
   const requestType = useSelector(
@@ -26,11 +27,11 @@ export const ProductList = () => {
   }
 
   if (data?.length === 0) {
-    return <div>Empty</div>;
+    return <div>Пустой отсек</div>;
   }
 
   return (
-    <div>
+    <div className={styles.productList}>
       {data?.map((item: ProductUnitType) => (
         <Product
           key={item.unit_unit_id}

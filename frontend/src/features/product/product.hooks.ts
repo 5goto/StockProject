@@ -2,6 +2,7 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import {
   ProductUnitType,
   getAllProducts,
+  getNotPlacedProducts,
   getProductsByCompartment,
 } from '../../api/unit';
 import { RequestType } from './productSlice';
@@ -16,6 +17,8 @@ export const useTypedQuery = (
       switch (requestType) {
         case RequestType.ALL:
           return getAllProducts();
+        case RequestType.NOT_PLACED:
+          return getNotPlacedProducts();
         case RequestType.COMPARTMENT:
           return getProductsByCompartment(compartmentId);
         case RequestType.NONE:

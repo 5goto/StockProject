@@ -13,6 +13,12 @@ export const Stock = () => {
     (store: RootState) => store.compartment.compartmentTabs
   );
 
+  const tmp = useSelector(
+    (store: RootState) => store.compartment.currentCompartment
+  );
+
+  console.log(tmp);
+
   console.log(productTabsIndexes);
 
   return (

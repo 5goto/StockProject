@@ -8,6 +8,8 @@ import { Compartment } from './Compartment';
 import { useDispatch } from 'react-redux';
 import { closeTab } from './compartmentSlice';
 import styles from './CompartmentList.module.css';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 export enum ConditionsType {
   Flammable = 'flammable',
@@ -24,13 +26,18 @@ export const CompartmentList: React.FC<CompartmentProps> = ({
   placementId,
   index,
 }) => {
+  const reload = useSelector(
+    (store: RootState) => store.compartment.currentCompartment
+  );
+
   const {
     data,
     isLoading,
     isError,
   }: UseQueryResult<Array<CompartmentType>, Error> = useQuery({
-    queryKey: [`placement_${placementId}`],
+    queryKey: [`placement_${placementId}`, reload],
     queryFn: () => getCompartmentsByPlacement(placementId),
+    staleTime: 0,
   });
 
   const dispatch = useDispatch();
@@ -45,7 +52,7 @@ export const CompartmentList: React.FC<CompartmentProps> = ({
         <h2 onClick={onCloseClickHandler} style={{ cursor: 'pointer' }}>
           X
         </h2>
-        <h3>Loading...</h3>;
+        <h3>Загрузка...</h3>;
       </div>
     );
   }
@@ -63,11 +70,11 @@ export const CompartmentList: React.FC<CompartmentProps> = ({
 
   if (data?.length === 0) {
     return (
-      <div>
+      <div className={styles.hints}>
         <h2 onClick={onCloseClickHandler} style={{ cursor: 'pointer' }}>
           X
         </h2>
-        <h2>Empty placement...</h2>
+        <h2>Помещение не содержит отсеков</h2>
       </div>
     );
   }
@@ -82,10 +89,11 @@ export const CompartmentList: React.FC<CompartmentProps> = ({
       </div>
       {data?.map((item: CompartmentType) => (
         <Compartment
-          key={item.compartment_id}
-          id={item.compartment_id}
-          capacity={item.compartment_capacity}
-          conditions_type={item.condition_conditions_type}
+          key={item.id}
+          id={item.id}
+          capacity={item.capacity}
+          conditions_type={item.conditionType}
+          totalСapacity={item.totalCapacity}
         />
       ))}
     </div>

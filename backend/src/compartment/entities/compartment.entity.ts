@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Placement } from 'src/placement/entities/placement.entity';
 import { Condition } from 'src/conditions/entities/condition.entity';
-import { Product } from 'src/product/entities/product.entity';
+import { Unit } from 'src/unit/entities/unit.entity';
 
 @Entity()
 export class Compartment {
@@ -32,6 +32,6 @@ export class Compartment {
   @JoinColumn({ name: 'placement_id' })
   placement: Placement;
 
-  @OneToMany(() => Product, (product) => product.compartment)
-  products: Product[];
+  @OneToMany(() => Unit, (unit) => unit.compartment)
+  unit: Unit[];
 }

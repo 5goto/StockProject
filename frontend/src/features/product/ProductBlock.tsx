@@ -2,23 +2,46 @@ import { useSelector } from 'react-redux';
 import styles from './ProductBlock.module.css';
 import { RootState } from '../../store';
 import { ProductList } from './ProductList';
+import { useDispatch } from 'react-redux';
+import { RequestType, setRequestType } from './productSlice';
 
 export const ProductBlock = () => {
   const compartmentId = useSelector(
     (state: RootState) => state.compartment.currentCompartment
   ) as unknown as string;
 
+  const requestType = useSelector(
+    (state: RootState) => state.product.requestType
+  );
+
+  const dispatch = useDispatch();
+
+  const allProductFilterHandler = () => {
+    dispatch(setRequestType(RequestType.ALL));
+  };
+
+  const notPlacedFilterHandler = () => {
+    dispatch(setRequestType(RequestType.NOT_PLACED));
+  };
+
   return (
     <div className={styles.productBlock}>
-      <h2>Products</h2>
+      <h2>Товары</h2>
       <div className={styles.filter}>
-        <details>
-          <summary>Filters:</summary>
-          <p>Раскрывающийся текст</p>
+        <details className={styles.details}>
+          <summary>Фильтры:</summary>
+          <div className={styles.filterButtonsBlock}>
+            <button onClick={allProductFilterHandler}>Все товары</button>
+            <button onClick={notPlacedFilterHandler}>Не размещенные</button>
+          </div>
         </details>
       </div>
       <div className={styles.hint}>
-        {compartmentId ? <ProductList /> : <h2>&larr; Выберите отсек</h2>}
+        {compartmentId || requestType !== RequestType.NONE ? (
+          <ProductList />
+        ) : (
+          <h2>&larr; Выберите отсек</h2>
+        )}
       </div>
     </div>
   );

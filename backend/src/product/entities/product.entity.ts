@@ -6,7 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Condition } from 'src/conditions/entities/condition.entity';
-import { Compartment } from 'src/compartment/entities/compartment.entity';
+import { Unit } from 'src/unit/entities/unit.entity';
 
 @Entity()
 export class Product {
@@ -23,6 +23,6 @@ export class Product {
   @JoinColumn({ name: 'conditions_id' })
   conditions: Condition;
 
-  @ManyToOne(() => Compartment, (compartment) => compartment.products)
-  compartment: Compartment;
+  @ManyToOne(() => Unit, (unit) => unit.unit_id)
+  unit: Unit;
 }

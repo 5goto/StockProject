@@ -2,6 +2,7 @@
   flex: 0 0 20%;
   background-color: #ffff;
   border-left: 3px solid #212121;
+  height: 100%;
 }
 
 .filter {
@@ -20,4 +21,20 @@
   text-align: center;
   margin: 0;
   padding: 1em;
+}
+
+.details {
+  min-height: 100px;
+}
+
+.filterButtonsBlock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.filterButtonsBlock > button {
+  border: 0;
+  background-color: #007bff;
+  margin: 5px;
 }

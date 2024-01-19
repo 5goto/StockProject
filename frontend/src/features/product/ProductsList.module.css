@@ -1,0 +1,7 @@
+.productList {
+  overflow: scroll;
+  height: 60vh;
+  overflow-x: hidden;
+
+  scrollbar-width: thin;
+}

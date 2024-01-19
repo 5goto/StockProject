@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { NewProduct } from './pages/NewProduct';
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="review" element={<Stock />} />
-                <Route path="product/new" element={<Main />} />
+                <Route path="product/new" element={<NewProduct />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>

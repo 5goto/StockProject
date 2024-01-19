@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ConditionsType } from '../features/compartment/CompartmentList';
+import { FormInputs } from '../features/product/NewProductFormBlock';
 
 export enum StatusType {
   NotPlaced = 'not_placed',
@@ -64,6 +65,29 @@ export async function getAllProducts() {
   }
 }
 
+export async function getNotPlacedProducts() {
+  try {
+    const { data } = await axios.get<ProductUnitType>(
+      `http://localhost:3000/unit/?not_placed=true`,
+      {
+        headers: {
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log('error message: ', error.message);
+      throw error;
+    } else {
+      console.log('unexpected error: ', error);
+      throw error;
+    }
+  }
+}
+
 export interface updateProductProps {
   productId: string;
   compartmentId: string;
@@ -71,12 +95,36 @@ export interface updateProductProps {
 
 export async function updateProductCompartment(props: updateProductProps) {
   try {
-    console.log(props.productId, '&&');
-    console.log(props.compartmentId, '&&');
     const responce = await axios.patch(
       `http://localhost:3000/unit/${props.productId}`,
       {
         compartment_id: props.compartmentId,
+      },
+      {
+        headers: {
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    return responce;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log('error message: ', error.message);
+      throw error;
+    } else {
+      console.log('unexpected error: ', error);
+      throw error;
+    }
+  }
+}
+
+export async function createProduct(data: FormInputs) {
+  try {
+    const responce = await axios.post(
+      `http://localhost:3000/unit`,
+      {
+        ...data,
       },
       {
         headers: {

@@ -3,6 +3,9 @@ import { ItemTypes } from '../../UI/dndTypes';
 import { StatusType } from '../../api/unit';
 import { ConditionsType } from '../compartment/CompartmentList';
 import styles from './Product.module.css';
+import fire from '../../assets/flammable.png';
+import frozen from '../../assets/frozen.png';
+import fragile from '../../assets/fragile.png';
 
 export interface ProductProps {
   id: number;
@@ -17,6 +20,7 @@ export interface ProductProps {
 export interface dropProp {
   type: unknown;
   id: string;
+  capacity: number;
 }
 
 export const Product: React.FC<ProductProps> = ({
@@ -30,12 +34,16 @@ export const Product: React.FC<ProductProps> = ({
 }) => {
   const [collected, drag] = useDrag(() => ({
     type: ItemTypes.PRODUCT,
-    item: { type: ItemTypes.PRODUCT, id },
+    item: { type: ItemTypes.PRODUCT, id, capacity },
     name: 'product',
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
+
+  const rDate = new Date(receipt_date);
+  const offDate = new Date(date_of_write_off);
+  console.log(rDate);
 
   return (
     <div
@@ -46,10 +54,30 @@ export const Product: React.FC<ProductProps> = ({
         cursor: 'move',
       }}>
       <div>
-        {id}, {product_name}, {capacity}, {receipt_date as unknown as string},{' '}
-        {date_of_write_off as unknown as string} {unit_status} {conditions_type}
+        {conditions_type === ConditionsType.Frozen && (
+          <img src={frozen} alt="frozen-icon" />
+        )}
+        {conditions_type === ConditionsType.Flammable && (
+          <img src={fire} alt="fire-icon" />
+        )}
+        {conditions_type === ConditionsType.Fragile && (
+          <img src={fragile} alt="fragile-icon" />
+        )}
       </div>
-      <button>Подробнее</button>
+      <h3>{product_name}</h3>
+      <div>
+        Принято: {rDate.getDate()}/{rDate.getMonth() + 1}/{rDate.getFullYear()}{' '}
+        Списание: {offDate.getDate()}/{offDate.getMonth() + 1}/
+        {offDate.getFullYear()}
+      </div>
+      <div>
+        Объем: {capacity} m<sup>3</sup>
+      </div>
+      <div>
+        {unit_status === StatusType.Placed && <p>Размещен</p>}
+        {unit_status === StatusType.NotPlaced && <p>Не размещен</p>}
+        {unit_status === StatusType.WrittenOff && <p>Списан</p>}
+      </div>
     </div>
   );
 };

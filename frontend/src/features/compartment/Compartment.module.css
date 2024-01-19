@@ -11,3 +11,11 @@
   background-color: #666666;
   cursor: pointer;
 }
+
+.compartmentSize {
+  flex: 1 0 auto;
+}
+
+.compartmentTypeView {
+  padding: 1em;
+}

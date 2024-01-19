@@ -22,7 +22,13 @@ export class UnitController {
   }
 
   @Get()
-  findAll(@Query('compartment_id') compartment_id?: number) {
+  findAll(
+    @Query('compartment_id') compartment_id?: number,
+    @Query('not_placed') not_placed?: boolean,
+  ) {
+    if (not_placed == true) {
+      return this.unitService.findAllNotPlacedProducts();
+    }
     if (compartment_id) {
       return this.unitService.findAllProductInfoByCompartmentId(compartment_id);
     } else {
