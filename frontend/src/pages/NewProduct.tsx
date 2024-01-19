@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './NewProduct.module.css';
 import { NewProductFormBlock } from '../features/product/NewProductFormBlock';
 

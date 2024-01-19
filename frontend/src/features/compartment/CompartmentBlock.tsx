@@ -1,6 +1,5 @@
 import styles from './CompartmentBlock.module.css';
 import React, { ReactNode } from 'react';
-import placementImg from '../../assets/placementImg.png';
 
 type Props = {
   children: ReactNode | ReactNode[];
