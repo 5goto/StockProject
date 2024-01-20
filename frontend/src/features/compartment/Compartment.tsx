@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { ConditionsType } from './CompartmentList';
 import styles from './Compartment.module.css';
 import { useDispatch } from 'react-redux';
@@ -14,6 +14,7 @@ import frozen from '../../assets/frozen.png';
 import fragile from '../../assets/fragile.png';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { ProgressBar } from '../../UI/progressBar/ProgressBar';
 
 interface CompartmentProps {
   id: number;
@@ -42,30 +43,36 @@ export const Compartment: React.FC<CompartmentProps> = ({
     mutationFn: updateProductCompartment,
     onSuccess: () => {
       console.log('Request done!');
+      dispatch(setCompartment(id));
     },
     onError: (error) => {
       console.log(error.message);
     },
   });
 
-  const handleDrop = useCallback(
-    (productId: string, productCapacity: number) => {
-      if (+totalСapacity + productCapacity <= capacity) {
-        updateProductMutation.mutate({
-          productId,
-          compartmentId: id as unknown as string,
-        });
-        dispatch(setCompartment(id));
-      } else {
-        alert('Не хватает места');
-      }
-    },
-    [totalСapacity, capacity, updateProductMutation, id, dispatch]
-  );
+  const handleDrop = (
+    productId: string,
+    productCapacity: number,
+    conditions: ConditionsType
+  ) => {
+    if (
+      +totalСapacity + productCapacity <= capacity &&
+      conditions == conditions_type
+    ) {
+      updateProductMutation.mutate({
+        productId,
+        compartmentId: id as unknown as string,
+      });
+      // dispatch(setCompartment(id));
+    } else {
+      alert('Операция не возможна');
+    }
+  };
 
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: ItemTypes.PRODUCT,
-    drop: (item: dropProp) => handleDrop(item.id, item.capacity),
+    drop: (item: dropProp) =>
+      handleDrop(item.id, item.capacity, item.conditions_type),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
@@ -103,26 +110,10 @@ export const Compartment: React.FC<CompartmentProps> = ({
           <img src={fragile} alt="fragile-icon" />
         )}
       </div>
-      <div className={styles.compartmentSize}>
+      <div>
         Размер: {fill} / {capacity}
       </div>
-      <div
-        style={{
-          width: '100%',
-          backgroundColor: '#f2f2f2',
-          borderRadius: '4px',
-          overflow: 'hidden',
-          flex: '0 0 60%',
-          marginRight: '15px',
-        }}>
-        <div
-          style={{
-            width: `${filledPercentage}%`,
-            height: '10px',
-            backgroundColor: '#007bff',
-          }}
-        />
-      </div>
+      <ProgressBar filledPercentage={filledPercentage}></ProgressBar>
     </div>
   );
 };

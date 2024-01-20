@@ -9,4 +9,5 @@ export class CreateUnitDto {
   status: StatusType;
   compartment: CreateCompartmentDto;
   product: CreateProductDto;
+  compartment_id?: number;
 }

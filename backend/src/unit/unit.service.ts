@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUnitDto } from './dto/create-unit.dto';
 import { UpdateUnitDto } from './dto/update-unit.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -135,8 +139,21 @@ export class UnitService {
       ...updateUnitDto,
     });
     if (!unit) {
-      throw new NotFoundException(`Product #${unit_id} not found`);
+      throw new NotFoundException(`Unit #${unit_id} not found`);
     }
+
+    if (updateUnitDto.compartment_id) {
+      const existingCompart = await this.compartmentRepo.findOne({
+        where: { id: updateUnitDto.compartment_id },
+      });
+      if (existingCompart) {
+        unit.compartment = existingCompart;
+        unit.status = StatusType.Placed;
+      } else {
+        return new BadRequestException('Bad compartment id');
+      }
+    }
+
     return await this.unitRepo.save(unit);
   }
 

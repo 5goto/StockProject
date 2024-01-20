@@ -30,6 +30,8 @@ export const CompartmentList: React.FC<CompartmentProps> = ({
     (store: RootState) => store.compartment.currentCompartment
   );
 
+  console.log('List');
+
   const {
     data,
     isLoading,
@@ -37,7 +39,6 @@ export const CompartmentList: React.FC<CompartmentProps> = ({
   }: UseQueryResult<Array<CompartmentType>, Error> = useQuery({
     queryKey: [`placement_${placementId}`, reload],
     queryFn: () => getCompartmentsByPlacement(placementId),
-    staleTime: 0,
   });
 
   const dispatch = useDispatch();

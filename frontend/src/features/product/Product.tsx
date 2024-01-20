@@ -21,6 +21,7 @@ export interface dropProp {
   type: unknown;
   id: string;
   capacity: number;
+  conditions_type: ConditionsType;
 }
 
 export const Product: React.FC<ProductProps> = ({
@@ -34,7 +35,7 @@ export const Product: React.FC<ProductProps> = ({
 }) => {
   const [collected, drag] = useDrag(() => ({
     type: ItemTypes.PRODUCT,
-    item: { type: ItemTypes.PRODUCT, id, capacity },
+    item: { type: ItemTypes.PRODUCT, id, capacity, conditions_type },
     name: 'product',
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
