@@ -61,37 +61,66 @@ export const NewProductFormBlock = () => {
           <br /> товара
         </h2>
       </div>
+
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="name">Название продукта</label>
         <input
-          placeholder="Название продукта"
-          {...register('product.product_name')}
+          id="name"
+          {...register('product.product_name', { required: true })}
         />
 
-        <input
-          type="date"
-          placeholder="Дата приема"
-          {...register('receipt_date', { required: true })}
-        />
-        <input
-          type="date"
-          placeholder="Дата списания"
-          {...register('date_of_write_off', { required: true })}
-        />
+        <div className={styles.dates}>
+          <div>
+            <label htmlFor="receipt_date">Дата приема</label>
+            <input
+              id="receipt_date"
+              type="date"
+              placeholder="Дата приема"
+              {...register('receipt_date', { required: true })}
+            />
+          </div>
+          <div>
+            <label style={{ textAlign: 'right' }} htmlFor="date_of_write_off">
+              Дата списания
+            </label>
+            <input
+              id="date_of_write_off"
+              type="date"
+              placeholder="Дата списания"
+              {...register('date_of_write_off', { required: true })}
+            />
+          </div>
+        </div>
 
-        <select {...register('product.conditions.conditions_type')}>
-          <option value={ConditionsType.Flammable}>flammable</option>
-          <option value={ConditionsType.Fragile}>fragile</option>
-          <option value={ConditionsType.Frozen}>frozen</option>
-        </select>
-
-        <input
-          type="number"
-          placeholder="Объем"
-          {...register('init_capacity', { required: true })}
-        />
-
+        <div className={styles.dates}>
+          <div>
+            <label htmlFor="conditions">Условия хранения</label>
+            <select
+              id="conditions"
+              {...register('product.conditions.conditions_type', {
+                required: true,
+              })}>
+              <option value={ConditionsType.Flammable}>Огнеопасный</option>
+              <option value={ConditionsType.Fragile}>Хрупкий</option>
+              <option value={ConditionsType.Frozen}>Замороженный</option>
+            </select>
+          </div>
+          <div>
+            <label style={{ textAlign: 'right' }} htmlFor="capacity">
+              Объём
+            </label>
+            <input
+              id="capacity"
+              type="number"
+              {...register('init_capacity', { required: true })}
+            />
+          </div>
+        </div>
         <div>
-          <select {...register('compartment.id')}>
+          <label htmlFor="compartment">Выбор отсека</label>
+          <select
+            id="compartment"
+            {...register('compartment.id', { required: true })}>
             <option value={0}>Выбрать позже</option>
             {data &&
               watch('init_capacity') &&
@@ -105,7 +134,7 @@ export const NewProductFormBlock = () => {
                 )
                 ?.map((item: CompartmentType) => (
                   <option value={item.id} key={item.id}>
-                    {JSON.stringify(item)}
+                    {item.totalCapacity} / {item.capacity}
                   </option>
                 ))}
           </select>

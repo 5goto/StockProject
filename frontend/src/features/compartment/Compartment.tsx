@@ -1,4 +1,3 @@
-import React from 'react';
 import { ConditionsType } from './CompartmentList';
 import styles from './Compartment.module.css';
 import { useDispatch } from 'react-redux';

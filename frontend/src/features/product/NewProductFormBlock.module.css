@@ -16,6 +16,9 @@
   flex-direction: column;
   max-width: 400px; /* Максимальная ширина для широких экранов */
   width: 100%; /* Чтобы input занимал всю доступную ширину */
+  border-radius: 25px;
+  border: 1px solid #b4b4b4;
+  padding: 1em;
 }
 
 .prompt {
@@ -27,8 +30,7 @@
 
 .form input,
 .form button,
-.form select,
-.form option {
+.form select {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -44,21 +46,35 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.form select option {
+  padding: 8px;
+  border: none;
+  background-color: #fff; /* Цвет фона */
+  color: #212121; /* Цвет текста */
 }
 
 .form .buttons {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 14px;
 }
 
 .form input[type='submit']:hover {
   background-color: #0056b3;
 }
 
+.form select {
+  background-color: #ffff;
+}
+
 .buttons {
   display: flex;
   font-size: 16px;
+  margin-top: 10px;
 }
 
 .buttons input {
@@ -67,4 +83,19 @@
 
 .buttons button {
   margin-left: 10px;
+}
+
+.newProduct label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #212121; /* Цвет текста метки */
+}
+
+.dates {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dates > * {
+  flex: 0 0 49%;
 }

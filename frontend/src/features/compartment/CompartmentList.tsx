@@ -30,8 +30,6 @@ export const CompartmentList: React.FC<CompartmentProps> = ({
     (store: RootState) => store.compartment.currentCompartment
   );
 
-  console.log('List');
-
   const {
     data,
     isLoading,
