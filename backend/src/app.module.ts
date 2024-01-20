@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductModule } from './product/product.module';
 import { CompartmentModule } from './compartment/compartment.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -18,7 +17,6 @@ import { UnitModule } from './unit/unit.module';
       inject: [ConfigService],
       useFactory: getPostgresConfig,
     }),
-    ProductModule,
     CompartmentModule,
     PlacementModule,
     ConditionsModule,
