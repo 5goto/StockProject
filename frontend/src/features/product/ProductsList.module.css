@@ -1,7 +1,21 @@
 .productList {
-  overflow: scroll;
-  height: 60vh;
+  overflow: auto;
+  height: 66vh;
   overflow-x: hidden;
+  width: 90%;
 
-  scrollbar-width: thin;
+  padding-right: 10px;
+}
+
+.productList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.productList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.productList::-webkit-scrollbar-thumb {
+  background: #007bff;
+  border-radius: 8px;
 }

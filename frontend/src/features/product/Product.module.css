@@ -1,6 +1,29 @@
 .product {
   border-radius: 5px;
-  border: 1px solid black;
   cursor: default;
   margin-bottom: 1em;
+  box-shadow: inset 1px 1px 5px #212121;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.product h3 {
+  margin: 0;
+}
+
+.placed {
+  color: #212121;
+}
+
+.notPlaced {
+  color: rgb(143, 0, 0);
+}
+
+.writtenOff {
+  color: #666666;
+}
+
+.content {
+  text-align: left;
+  padding-left: 1em;
 }

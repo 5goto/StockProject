@@ -26,9 +26,11 @@ export const ProductBlock = () => {
 
   return (
     <div className={styles.productBlock}>
-      <h2>Товары</h2>
+      <div className={styles.title}>
+        <h2>Товары</h2>
+      </div>
       <div className={styles.filter}>
-        <details className={styles.details}>
+        <details className={styles.details} open>
           <summary>Фильтры:</summary>
           <div className={styles.filterButtonsBlock}>
             <button onClick={allProductFilterHandler}>Все товары</button>

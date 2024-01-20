@@ -43,7 +43,21 @@ export const Product: React.FC<ProductProps> = ({
 
   const rDate = new Date(receipt_date);
   const offDate = new Date(date_of_write_off);
-  console.log(rDate);
+
+  let statusStyleClass = '';
+  switch (unit_status) {
+    case StatusType.Placed:
+      statusStyleClass = styles.placed;
+      break;
+    case StatusType.NotPlaced:
+      statusStyleClass = styles.notPlaced;
+      break;
+    case StatusType.WrittenOff:
+      statusStyleClass = styles.writtenOff;
+      break;
+    default:
+      break;
+  }
 
   return (
     <div
@@ -65,15 +79,17 @@ export const Product: React.FC<ProductProps> = ({
         )}
       </div>
       <h3>{product_name}</h3>
-      <div>
+      <div className={styles.content}>
         Принято: {rDate.getDate()}/{rDate.getMonth() + 1}/{rDate.getFullYear()}{' '}
+      </div>
+      <div className={styles.content}>
         Списание: {offDate.getDate()}/{offDate.getMonth() + 1}/
         {offDate.getFullYear()}
       </div>
-      <div>
+      <div className={styles.content}>
         Объем: {capacity} m<sup>3</sup>
       </div>
-      <div>
+      <div className={statusStyleClass}>
         {unit_status === StatusType.Placed && <p>Размещен</p>}
         {unit_status === StatusType.NotPlaced && <p>Не размещен</p>}
         {unit_status === StatusType.WrittenOff && <p>Списан</p>}
