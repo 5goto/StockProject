@@ -13,11 +13,8 @@ export class Product {
   @PrimaryGeneratedColumn()
   product_id: number;
 
-  @Column({ length: 255 })
+  @Column({ length: 255, unique: true })
   product_name: string;
-
-  // @Column()
-  // conditions_id: number;
 
   @ManyToOne(() => Condition, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'conditions_id' })

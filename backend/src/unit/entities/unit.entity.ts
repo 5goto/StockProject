@@ -6,6 +6,8 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 
 export enum StatusType {
@@ -27,6 +29,20 @@ export class Unit {
 
   @Column({ type: 'date', nullable: true })
   date_of_write_off: Date;
+
+  @BeforeInsert() // ограничение на дату (прием < списание)
+  @BeforeUpdate()
+  validateDates() {
+    if (
+      this.receipt_date &&
+      this.date_of_write_off &&
+      this.receipt_date >= this.date_of_write_off
+    ) {
+      throw new Error(
+        'Receipt date must be strictly less than date of write off',
+      );
+    }
+  }
 
   @Column({ type: 'enum', enum: StatusType, default: StatusType.NotPlaced })
   status: StatusType;

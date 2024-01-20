@@ -6,10 +6,10 @@ export class Placement {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ default: 1 })
   placement_floor: number;
 
-  @Column({ length: 255 })
+  @Column({ length: 255, unique: true })
   placement_name: string;
 
   @OneToMany(() => Compartment, (compartment) => compartment.placement)
