@@ -8,12 +8,12 @@
 }
 
 .compartment:hover {
-  background-color: #666666;
+  background-color: #666666 !important;
   cursor: pointer;
 }
 
 .compartmentSize {
-  flex: 1 0 auto;
+  padding: 5px;
 }
 
 .compartmentTypeView {

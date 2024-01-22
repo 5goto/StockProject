@@ -109,7 +109,7 @@ export const Compartment: React.FC<CompartmentProps> = ({
           <img src={fragile} alt="fragile-icon" />
         )}
       </div>
-      <div>
+      <div className={styles.compartmentSize}>
         Размер: {fill} / {capacity}
       </div>
       <ProgressBar filledPercentage={filledPercentage}></ProgressBar>

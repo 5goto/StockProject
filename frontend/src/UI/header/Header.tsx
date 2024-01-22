@@ -5,7 +5,9 @@ export const Header = () => {
   return (
     <div className={styles.headerStyle}>
       <div className={styles.logo}>
-        <h2>Stockman</h2>
+        <NavLink to="/">
+          <h2>Stockman</h2>
+        </NavLink>
       </div>
       <nav className={styles.navigation}>
         <NavLink to="../product/new">Добавить товар</NavLink>
