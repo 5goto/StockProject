@@ -1,7 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+export interface TabProp {
+  id: number;
+  name: string;
+}
+
 interface CompartmentState {
-  compartmentTabs: number[];
+  compartmentTabs: TabProp[];
   currentCompartment: number | null;
 }
 
@@ -15,7 +20,7 @@ const compartmentSlice = createSlice({
   initialState, // initial state для slice
   reducers: {
     // все наши action
-    addTab(state, action: PayloadAction<number>) {
+    addTab(state, action: PayloadAction<TabProp>) {
       // action creator
       if (state.compartmentTabs.length < 4) {
         state.compartmentTabs.push(action.payload);

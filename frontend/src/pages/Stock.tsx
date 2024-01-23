@@ -7,6 +7,7 @@ import { CompartmentList } from '../features/compartment/CompartmentList.js';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store.js';
 import { Header } from '../UI/header/Header.js';
+import { TabProp } from '../features/compartment/compartmentSlice.js';
 
 export const Stock = () => {
   const productTabsIndexes = useSelector(
@@ -19,11 +20,12 @@ export const Stock = () => {
       <div className={styles.main}>
         <PlacementBlock></PlacementBlock>
         <CompartmentBlock defaultComponent={<Hint></Hint>}>
-          {productTabsIndexes.map((item: number, index: number) => (
+          {productTabsIndexes.map((item: TabProp, index: number) => (
             <CompartmentList
               key={index}
               index={index}
-              placementId={item}></CompartmentList>
+              placementId={item.id}
+              placementName={item.name}></CompartmentList>
           ))}
         </CompartmentBlock>
         <ProductBlock />

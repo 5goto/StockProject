@@ -12,7 +12,7 @@ export const Placement: React.FC<PlacementsData> = ({ id, name, floor }) => {
   const dispatch = useDispatch();
 
   const onBlockClickHandler = () => {
-    dispatch(addTab(id));
+    dispatch(addTab({ id, name }));
   };
 
   return (

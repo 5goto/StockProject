@@ -20,11 +20,13 @@ export enum ConditionsType {
 export interface CompartmentProps {
   placementId: number;
   index: number;
+  placementName: string;
 }
 
 export const CompartmentList: React.FC<CompartmentProps> = ({
   placementId,
   index,
+  placementName,
 }) => {
   const reload = useSelector(
     (store: RootState) => store.compartment.currentCompartment
@@ -81,7 +83,7 @@ export const CompartmentList: React.FC<CompartmentProps> = ({
   return (
     <div className={styles.placementView}>
       <div className={styles.placementViewTop}>
-        <h2>Список помещений</h2>
+        <h2>Список помещений ({placementName})</h2>
         <h2 onClick={onCloseClickHandler} style={{ cursor: 'pointer' }}>
           X
         </h2>
