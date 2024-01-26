@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
 import { CompartmentModule } from './compartment/compartment.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -22,7 +21,5 @@ import { UnitModule } from './unit/unit.module';
     ConditionsModule,
     UnitModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

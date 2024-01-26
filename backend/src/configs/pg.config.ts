@@ -4,8 +4,6 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 export const getPostgresConfig = async (
   configService: ConfigService,
 ): Promise<TypeOrmModuleOptions> => {
-  console.log(__dirname + '../**/*.entity{.ts,.js}');
-
   return {
     type: 'postgres',
     host: configService.get('DB_HOST'),
